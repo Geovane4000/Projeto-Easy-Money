@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easymoney</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #2c003e; /* Fundo roxo escuro */
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #b3003b; /* Vermelho escuro */
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #4b0068; /* Roxo intermediário */
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"], input[type="number"] {
+      width: calc(100% - 10px);
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    input[type="submit"] {
+      background-color: #b3003b; /* Botão vermelho */
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #d40046;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table th, table td {
+      text-align: left;
+      padding: 10px;
+      border: 1px solid #ffffff;
+    }
+
+    table th {
+      background-color: #b3003b; /* Vermelho escuro */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>EasyMoney</h1>
+  </header>
+  <div class="container">
+    <h2>Adicione seus gastos</h2>
+    <form id="finance-form">
+      <div class="form-group">
+        <label for="item">Item</label>
+        <input type="text" id="item" placeholder="Nome do item" required>
+      </div>
+      <div class="form-group">
+        <label for="value">Valor (R$)</label>
+        <input type="number" id="value" placeholder="Valor do item" step="0.01" required>
+      </div>
+      <input type="submit" value="Adicionar">
+    </form>
+
+    <h2>Itens adicionados</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Valor (R$)</th>
+        </tr>
+      </thead>
+      <tbody id="item-list">
+        <!-- Os itens adicionados serão inseridos aqui -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    document.getElementById('finance-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const item = document.getElementById('item').value;
+      const value = parseFloat(document.getElementById('value').value).toFixed(2);
+
+      if (item && value) {
+        const tbody = document.getElementById('item-list');
+        const row = document.createElement('tr');
+        
+        row.innerHTML = `<td>${item}</td><td>R$ ${value}</td>`;
+        tbody.appendChild(row);
+
+        // Limpa os campos
+        document.getElementById('item').value = '';
+        document.getElementById('value').value = '';
+      }
+    });
+  </script>
+</body>
+</html>
